@@ -6,12 +6,16 @@ class FileUpload extends Component{
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.fileInput = React.createRef();
+        this.state={
+            selectedFile: null
+        }
     }
     handleSubmit(event){
         event.preventDefault();
-        alert(
-            `Selected file - ${this.fileInput.current.files[0].name}`
-        )
+        if(this.state.selectedFile){
+        alert(`Selected file - ${this.fileInput.current.files[0].name}`)
+    }else
+        alert(`Selecte a file dumbass`)
     };
 
     render() {
