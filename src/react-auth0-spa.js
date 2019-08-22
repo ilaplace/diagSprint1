@@ -34,8 +34,11 @@ export const Auth0Provider = ({
       if (isAuthenticated) {
         const user = await auth0FromHook.getUser();
         setUser(user);
+        const token = await auth0FromHook.getTokenSilently();
+        localStorage.setItem('token', token);
       }
-
+     
+      
       setLoading(false);
     };
     initAuth0();
@@ -66,7 +69,6 @@ export const Auth0Provider = ({
      }
     try {
       await auth0Client.loginWithRedirect(options);
-      console.log("redirec");
       
     } catch (error) {
       console.log(error);
@@ -81,9 +83,11 @@ export const Auth0Provider = ({
     setIsAuthenticated(true);
     setUser(user);
 
-    //deneme
-    const token = auth0Client.getTokenSilently();
-    localStorage.setItem('token', token);
+    // deneme
+    // const token = auth0Client.getTokenSilently();
+    // localStorage.setItem('token', token);
+    // console.log(token);
+    
 
   };
   return (
