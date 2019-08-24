@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "reactstrap";
-import Highlight from "../components/Highlight";
+//import Highlight from "../components/Highlight";
 import FileUpload  from "../components/FileUpload";
 import { useQuery }  from "@apollo/react-hooks";
 import gql from "graphql-tag";
