@@ -7,15 +7,20 @@ const Uploader = () => {
     const fileInput = React.createRef();
     
     const sendToServer = async (data)=> {
-        const response = await axios.post("http://localhost:5000",
+
+        try{
+            const response = await axios.post("http://localhost:3010/api/upload",
                     data, {});
-        console.log(response);
+            console.log(response);
+        }catch(error){
+            console.error(error)
+        }
         
     };
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = new FormData();
-        data.append(selectedFile.name, selectedFile);
+        data.append('file', selectedFile);
         sendToServer(data);
         
     };
