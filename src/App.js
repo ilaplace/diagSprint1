@@ -9,6 +9,8 @@ import Footer from "./components/Footer";
 import Home from "./views/Home";
 import Profile from "./views/Profile";
 import ExternalApi from "./views/ExternalApi";
+import Diagnose from "./views/Diagnose";
+import Learner from "./views/Learner";
 import { useAuth0 } from "./react-auth0-spa";
 
 // styles
@@ -34,6 +36,8 @@ const App = () => {
             <Route path="/" exact component={Home} />
             <PrivateRoute path="/profile" component={Profile} />
             <PrivateRoute path="/external-api" component={ExternalApi} />
+            <PrivateRoute path="/diagnose" component={Diagnose} />
+            <PrivateRoute path="/learner" component={Learner} />
           </Switch>
         </Container>
         <Footer />

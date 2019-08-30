@@ -29,11 +29,9 @@ const ExternalApi = () => {
   return (
     <>
       <div className="mb-5">
-        <h1>External API</h1>
+        <h1>Databases</h1>
         <p>
-          Ping an external API by clicking the button below. This will call the
-          external API using an access token, and the API will validate it using
-          the API's audience value.
+          You can upload your database from here!
         </p>
         <Button color="primary" className="mt-5" onClick={callApi}>
           Ping API
