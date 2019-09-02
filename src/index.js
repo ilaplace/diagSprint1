@@ -24,7 +24,7 @@ const onRedirectCallback = appState => {
 
 const cache = new InMemoryCache();
 const httpLink = new HttpLink({
-  uri: 'graphql'
+  uri: 'http://127.0.0.1:3010/graphql'
 });
 
 const authLink = setContext((_, { headers }) => {

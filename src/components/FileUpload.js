@@ -12,7 +12,7 @@ const Uploader = () => {
         const token = localStorage.getItem('token');
   
         try{
-            const response = await axios.post("api/upload",
+            const response = await axios.post("http://127.0.0.1:3010/api/upload",
                     data, { headers: {Authorization: token ? `Bearer ${token}` : ""}});
             console.log(response);
         }catch(error){
