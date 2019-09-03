@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import { Button } from "reactstrap";
 import { useMutation, useQuery }  from "@apollo/react-hooks";
 import gql from "graphql-tag";
-
 
 const START_TRAINING = gql`
   mutation StartTraining{
@@ -14,30 +13,34 @@ const CHECK_STATUS = gql`
         checkStatus
     }
 `
-
 const Learner = () => {
 
-    const [training, setTraining] = useState("");
-    const [startTrain, {response}] = useMutation(START_TRAINING);
-    const {data, error, refetch, startPolling, stopPolling} = useQuery(CHECK_STATUS);
-
+    const [ training, setTraining ] = useState('untrained');
+    const [ startTrain ] = useMutation(START_TRAINING);
+    const { refetch } = useQuery(CHECK_STATUS);
     
-    const trainHandler = () => {
-        
-        startTrain();
-        startPolling(500)
+    var t;
+    const timerCallback = async () => {
+        const {data} = await refetch()
+        setTraining(data.checkStatus)
         if (data.checkStatus === 'done') {
-            stopPolling()
+            clearInterval(t)
         }
-        //refetch()
-        setTraining(response)       
-         
+    
+    };
+    const trainHandler = () => {
+        setTraining('training');
+        startTrain();
+        t = setInterval(timerCallback,1000);
         
     };
+    const cancelHandler = () =>{
+        clearInterval(t)
+        
+    }
     return(
         <div>
             <h1>Learner</h1>
-            <p>{data.checkStatus} </p>
 
             <p>Your database is {training}</p>
             <Button color="primary" className="mt-3" 
@@ -46,7 +49,7 @@ const Learner = () => {
             </Button>{' '}
             
             <Button color="secondary" className="mt-3" 
-                    onClick={()=>{setTraining(0)}}>
+                    onClick={()=>{cancelHandler()}}>
                     Cancel
             </Button>
         </div>
