@@ -3,12 +3,15 @@ import { Button } from "reactstrap";
 import { useMutation, useQuery }  from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
+// TODO: Disable the train button after training started
+
 const START_TRAINING = gql`
   mutation StartTraining{
         startTraining
   }
 `
 const CHECK_STATUS = gql`
+
     query CheckStatus{
         checkStatus
     }
