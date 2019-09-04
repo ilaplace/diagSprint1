@@ -1,30 +1,9 @@
-import React, { useState } from "react";
-import { Button } from "reactstrap";
-//import Highlight from "../components/Highlight";
+import React from "react";
 import FileUpload  from "../components/FileUpload";
-import { useQuery }  from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
-const GET_HELLO = gql`
-  query hellom{
-    hello
-  }
-`
-
 const ExternalApi = () => {
-  const [showResult, setShowResult] = useState(false);
-  const [apiMessage, setApiMessage] = useState("");
-
-  const {data, error, refetch} = useQuery(GET_HELLO);
   
-
-  const callApi = async () => {
-    const responseData = data;
-    setShowResult(true);
-    setApiMessage(responseData);
-    refetch()
-    if (error) return `Error! ${error}`;
-  };
   
   return (
     <>
@@ -33,19 +12,10 @@ const ExternalApi = () => {
         <p>
           You can upload your database from here!
         </p>
-        <Button color="primary" className="mt-5" onClick={callApi}>
-          Ping API
-        </Button>
-      </div>
-      <div className="result-block-container">
-        <div className={`result-block ${showResult && "show"}`}>
-          <h6 className="muted">Result</h6>
-          {/* <Highlight>{JSON.stringify(apiMessage, null, 2)}</Highlight> */}
-        </div>
-        <div className="pt-5"><h5>{apiMessage ? JSON.stringify(apiMessage,null,6) : null}</h5></div>
-      <div> <FileUpload /> </div>
+        <div> <FileUpload /> </div>
       </div>
       
+        {/* <div className={`result-block ${showResult && "show"}`}> */} 
 
     </>
   );
