@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 import { Button } from "reactstrap";
 import { useMutation, useQuery }  from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import { Spinner } from 'reactstrap';
 
 // TODO: Disable the train button after training started
 
@@ -46,6 +47,7 @@ const Learner = () => {
             <h1>Learner</h1>
 
             <p>Your database is {training}</p>
+            {(training==='training') ? (<Spinner> </Spinner>) : null }
             <Button color="primary" className="mt-3" 
                     onClick={trainHandler}>
                     Train
