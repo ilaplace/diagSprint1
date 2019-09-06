@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input, Label } from 'reactstrap';
 import Diagnose from '../views/Diagnose'
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 
 const ModalDiag =   ({data}) => {
     
     const [state, setMyState] = useState(false);
     const [secondState, setSecondState] = useState(false);
     const [patientNumber, setPatientNumber] = useState(1);
-
+    
+    
     const toggle = () => {
         setMyState(!state)
     }
@@ -21,16 +20,14 @@ const ModalDiag =   ({data}) => {
 
     const selectHandler = (event) => {
         setPatientNumber(event.target.value);
-
-
     }
     return (
         <div>
                 <Form >
-                <Button onClick={toggle}>Diag</Button>
-                <FormGroup>
+                <Label>Please select the number of patients that you want to diagnose</Label>
+                <FormGroup >
                     <Label for="Select the number of patients"></Label>
-                    <Input type="select" name="select" onChange={selectHandler} value={patientNumber}>
+                    <Input type="select" name="select" style={{width: "20%"}} onChange={selectHandler} value={patientNumber}>
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -39,6 +36,7 @@ const ModalDiag =   ({data}) => {
                     </Input>
                 </FormGroup>
             </Form>
+            <Button onClick={toggle} className="my-3">Diagnose</Button>
             <Modal isOpen={state} toggle={toggle}>
                 <ModalHeader toggle={toggle}>Diagonse a sucker</ModalHeader>
                 <ModalBody>

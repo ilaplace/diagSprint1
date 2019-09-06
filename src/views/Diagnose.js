@@ -7,17 +7,25 @@ import 'react-datasheet/lib/react-datasheet.css';
 const Diagnose = ({classifier, numberOfPatients}) => {
 
     // If condition the avoid this error if classifier could not be read
-    const typesOfFeatures = classifier ? classifier.getClassifier.numberOfFeatureTypes : 3
+   
+    
     var objects = [];
 
-    for (var i = 0; i < typesOfFeatures; i++) {
+    for (var i = 0; i < classifier.length; i++) {
         objects.push({ value: '' });
     }
 
-    const grid = [
-        [{ value: 'A', readOnly: true },
-         { value: 'B', readOnly: true },
-         { value: 'C', readOnly: true }]]
+    // const grid = [
+    //     [{ value: 'A', readOnly: true },
+    //      { value: 'B', readOnly: true },
+    //      { value: 'C', readOnly: true }]]
+
+    const grid = []
+    const header = []
+    for (var k =0; k < classifier.length; k++){
+        header.push({value: classifier[k], readOnly: true})
+    }
+    grid.push(header)
 
     for (var j = 0; j < numberOfPatients; j++) {
         grid.push(objects)

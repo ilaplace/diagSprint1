@@ -19,23 +19,29 @@ const CHECK_STATUS = gql`
 `
 const Learner = () => {
 
-    const [ training, setTraining ] = useState('untrained');
-    const [ startTrain ] = useMutation(START_TRAINING);
-    const { refetch } = useQuery(CHECK_STATUS);
-    
-    var t;
     const timerCallback = async () => {
+
+        // Should not await the the data 
         const {data} = await refetch()
-        setTraining(data.checkStatus)
+        // gotta check if the check status available
+        data.checkStatus && setTraining(data.checkStatus)
         if (data.checkStatus === 'done') {
             clearInterval(t)
         }
     
     };
+    
+    
+    const [ training, setTraining ] = useState('untrained');
+    const [ startTrain ] = useMutation(START_TRAINING);
+    const { refetch } = useQuery(CHECK_STATUS);
+    var t;
+    t = setInterval(timerCallback,1000);
+    
     const trainHandler = () => {
         setTraining('training');
         startTrain();
-        t = setInterval(timerCallback,1000);
+        
         
     };
     const cancelHandler = () =>{
@@ -44,16 +50,21 @@ const Learner = () => {
     }
     return(
         <div>
-            <h1>Learner</h1>
-
-            <p>Your database is {training}</p>
-            {(training==='training') ? (<Spinner> </Spinner>) : null }
-            <Button color="primary" className="mt-3" 
+            <h2>Learner</h2>
+            {(training==='training') ?(
+                <>
+                <Spinner />
+                <br />
+                </>
+            ) : (
+                <p>Your database is {training}</p>)}
+           
+            <Button color="primary" className="my-3" 
                     onClick={trainHandler}>
                     Train
             </Button>{' '}
             
-            <Button color="secondary" className="mt-3" 
+            <Button color="secondary" className="my-3" 
                     onClick={()=>{cancelHandler()}}>
                     Cancel
             </Button>

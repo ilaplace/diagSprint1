@@ -1,31 +1,35 @@
 import React  from 'react'
-import ExternalApi from '../components/FileUpload'
 import Learner from './Learner'
-import Diagnose from './Diagnose'
 import DiagModal from '../components/DiagModal'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
+import Loading from '../components/Loading'
 
 const GET_CLASSIFIER = gql`
 query GetClassifie{
     getClassifier{
-        numberOfFeatureTypes
+        featureTypes
+        classifierStatus
   }
 }
 `
 
-
  const TheApp = () => {
+
     const { data } = useQuery(GET_CLASSIFIER);
+
+   
+    //data && data.getClassifier && console.log(data.getClassifier.classifierStatus);
+    const istate = data && data.getClassifier && data.getClassifier.classifierStatus  
+
+    const typesOfFeatures = data && data.getClassifier && data.getClassifier.featureTypes 
+
     return (
-        <>
-            <ExternalApi />
-            {/* <Diagnose classifier={data}/> */}
+        <>            
+            <Learner initialState={istate}/>  
             <hr />
-            <Learner/> 
-            
-            <hr />
-            <DiagModal data={data} />
+            <h2>Run Diagnostics</h2>
+            <DiagModal data={typesOfFeatures} />
         </>
     )
 }
