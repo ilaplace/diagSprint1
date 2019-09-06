@@ -4,15 +4,8 @@ import Diagnose from '../views/Diagnose'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-const GET_CLASSIFIER = gql`
-    query GetClassifie{
-        getClassifier{
-            numberOfFeatureTypes
-    }
-}
-`
-const ModalDiag =   () => {
-    const { data } = useQuery(GET_CLASSIFIER);
+const ModalDiag =   ({data}) => {
+    
     const [state, setMyState] = useState(false);
     const [secondState, setSecondState] = useState(false);
     const [patientNumber, setPatientNumber] = useState(1);

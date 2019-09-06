@@ -25,7 +25,7 @@ query GetClassifie{
             <Learner/> 
             
             <hr />
-            <DiagModal />
+            <DiagModal data={data} />
         </>
     )
 }
