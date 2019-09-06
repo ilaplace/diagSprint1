@@ -21,6 +21,7 @@ import "./App.css";
 
 // fontawesome
 import initFontAwesome from "./utils/initFontAwesome";
+import  TheApp  from "./views/TheApp";
 initFontAwesome();
 
 const GET_CLASSIFIER = gql`
@@ -50,6 +51,7 @@ const App = () => {
             <PrivateRoute path="/external-api" component={ExternalApi} />
             <StatefulRoute path="/diagnose" component={Diagnose} classifier={data}/>
             <PrivateRoute path="/learner" component={Learner} />
+            <Route path="/theapp" component={TheApp} />
           </Switch>
         </Container>
         <Footer />

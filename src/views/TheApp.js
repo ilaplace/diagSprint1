@@ -15,7 +15,6 @@ query GetClassifie{
 `
 
 
-
  const TheApp = () => {
     const { data } = useQuery(GET_CLASSIFIER);
     return (

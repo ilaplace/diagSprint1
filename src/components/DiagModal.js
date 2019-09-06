@@ -11,7 +11,7 @@ const GET_CLASSIFIER = gql`
     }
 }
 `
-const ModalDiag = () => {
+const ModalDiag =   () => {
     const { data } = useQuery(GET_CLASSIFIER);
     const [state, setMyState] = useState(false);
     const [secondState, setSecondState] = useState(false);
@@ -33,7 +33,6 @@ const ModalDiag = () => {
     }
     return (
         <div>
-       
                 <Form >
                 <Button onClick={toggle}>Diag</Button>
                 <FormGroup>
@@ -45,17 +44,8 @@ const ModalDiag = () => {
                         <option>4</option>
                         <option>5</option>
                     </Input>
-                    
                 </FormGroup>
-                
             </Form>
-                
-           
-      
-
-        
-            
-
             <Modal isOpen={state} toggle={toggle}>
                 <ModalHeader toggle={toggle}>Diagonse a sucker</ModalHeader>
                 <ModalBody>
