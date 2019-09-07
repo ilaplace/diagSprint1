@@ -12,7 +12,6 @@ const START_TRAINING = gql`
   }
 `
 const CHECK_STATUS = gql`
-
     query CheckStatus{
         checkStatus
     }
