@@ -1,18 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { useMutation } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-import { Button } from 'reactstrap'
-
-const DELETE_DATABASE = gql`
-    mutation DeleteDatabase{
-        deleteDatabase
-
-}`
 
 const Uploader = ({sendToServer}) => {
     const [selectedFile, setFile] = useState(null);
-    const [deleteDatabase] = useMutation(DELETE_DATABASE);
+    
     const fileInput = React.createRef();
 
     const handleSubmit = (e) => {
@@ -45,7 +35,7 @@ const Uploader = ({sendToServer}) => {
                     </label>
                 </div>
             </form>
-            <Button className="my-3" color="danger" onClick={() => { deleteDatabase() }}>Delete Database</Button>
+           
             
         </>
     );

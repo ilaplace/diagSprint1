@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Container } from "reactstrap";
 
@@ -22,12 +22,26 @@ import "./App.css";
 // fontawesome
 import initFontAwesome from "./utils/initFontAwesome";
 import  TheApp  from "./views/TheApp";
+
 initFontAwesome();
 
+const GET_CLASSIFIER = gql`
+query GetClassifie{
+    getClassifier{
+        featureTypes
+        classifierStatus
+  }
+}
+`
 const App = () => {
 
+  const { data } = useQuery(GET_CLASSIFIER);
   const { loading } = useAuth0();
+  
 
+
+
+  
   if (loading) {
     return <Loading />;
   }
@@ -40,7 +54,7 @@ const App = () => {
           <Switch>
             <Route path="/" exact component={Home} />
             <PrivateRoute path="/profile" component={Profile}  />
-            <PrivateRoute path="/external-api" component={ExternalApi} />          
+            <StatefulRoute path="/external-api" component={ExternalApi} data={data}/>          
             <PrivateRoute path="/theapp" component={TheApp} />
           </Switch>
         </Container>
