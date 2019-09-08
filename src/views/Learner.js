@@ -22,6 +22,8 @@ const Learner = () => {
 
         // Should not await the the data 
         const {data} = await refetch()
+        data && console.log(data);
+        
         // gotta check if the check status available
         data.checkStatus && setTraining(data.checkStatus)
         if (data.checkStatus === 'done') {

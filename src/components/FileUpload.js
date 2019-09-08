@@ -10,25 +10,11 @@ const DELETE_DATABASE = gql`
 
 }`
 
-const Uploader = () => {
+const Uploader = ({sendToServer}) => {
     const [selectedFile, setFile] = useState(null);
     const [deleteDatabase] = useMutation(DELETE_DATABASE);
     const fileInput = React.createRef();
 
-    // TODO: Show error to the user
-    // TODO: Show that the upload is done
-    const sendToServer = async (data) => {
-        const token = localStorage.getItem('token');
-
-        try {
-            const response = await axios.post("http://127.0.0.1:3010/api/upload",
-                data, { headers: { Authorization: token ? `Bearer ${token}` : "" } });
-            console.log(response);
-        } catch (error) {
-            console.error(error)
-        }
-
-    };
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("in submit");
@@ -60,16 +46,7 @@ const Uploader = () => {
                 </div>
             </form>
             <Button className="my-3" color="danger" onClick={() => { deleteDatabase() }}>Delete Database</Button>
-            {/* <form onSubmit={handleSubmit}>
-                <label>
-                    Upload file:
-                    {' '} <input type="file" 
-                            ref={fileInput} 
-                            onChange={(e)=>{setFile(e.target.files[0])}}/> 
-                </label>
-                <br />
-                <button type="submit">Submit</button>
-            </form> */}
+            
         </>
     );
 

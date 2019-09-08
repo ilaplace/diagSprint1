@@ -24,16 +24,8 @@ import initFontAwesome from "./utils/initFontAwesome";
 import  TheApp  from "./views/TheApp";
 initFontAwesome();
 
-const GET_CLASSIFIER = gql`
-query GetClassifie{
-    getClassifier{
-        numberOfFeatureTypes
-  }
-}
-`
-
 const App = () => {
-  const { data } = useQuery(GET_CLASSIFIER);
+
   const { loading } = useAuth0();
 
   if (loading) {
@@ -48,10 +40,8 @@ const App = () => {
           <Switch>
             <Route path="/" exact component={Home} />
             <PrivateRoute path="/profile" component={Profile}  />
-            <PrivateRoute path="/external-api" component={ExternalApi} />
-            <StatefulRoute path="/diagnose" component={Diagnose} classifier={data}/>
-            <PrivateRoute path="/learner" component={Learner} />
-            <Route path="/theapp" component={TheApp} />
+            <PrivateRoute path="/external-api" component={ExternalApi} />          
+            <PrivateRoute path="/theapp" component={TheApp} />
           </Switch>
         </Container>
         <Footer />

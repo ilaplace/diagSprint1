@@ -52,7 +52,7 @@ const NavBar = () => {
                 <NavItem>
                   <NavLink
                     tag={RouterNavLink}
-                    to="/diagnose"
+                    to="/theapp"
                     exact
                     activeClassName="router-link-exact-active"
                   >
@@ -60,18 +60,7 @@ const NavBar = () => {
                   </NavLink>
                 </NavItem>
               )}
-              {isAuthenticated && (
-                <NavItem>
-                  <NavLink
-                    tag={RouterNavLink}
-                    to="/learner"
-                    exact
-                    activeClassName="router-link-exact-active"
-                  >
-                    Learner
-                  </NavLink>
-                </NavItem>
-              )}
+             
               {isAuthenticated && (
                 <NavItem>
                   <NavLink
