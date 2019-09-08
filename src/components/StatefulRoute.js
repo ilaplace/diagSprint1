@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Route } from "react-router-dom";
 import { useAuth0 } from "../react-auth0-spa";
 
-const PrivateRoute = ({ component: Component, path, data, ...rest }) => {
+const PrivateRoute = ({ component: Component, path, data, refetch, ...rest }) => {
   const { isAuthenticated, loginWithRedirect } = useAuth0();
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const PrivateRoute = ({ component: Component, path, data, ...rest }) => {
   if (!isAuthenticated) return null;
 
   const render = props =>
-    isAuthenticated === true ? <Component {...props} data={data}/> : null;
+    isAuthenticated === true ? <Component {...props} data={data} refetch={refetch} /> : null;
 
   return <Route path={path} render={render} {...rest} />;
 };

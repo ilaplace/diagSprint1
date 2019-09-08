@@ -14,7 +14,7 @@ const DELETE_DATABASE = gql`
 }`
 
 
-const ExternalApi = ({ data }) => {
+const ExternalApi = ({ data, refetch}) => {
   const [success, setSuccess] = useState(false);
   const [deleteDatabase] = useMutation(DELETE_DATABASE);
   const [ baseExists, setBaseExists ] = useState();
@@ -36,6 +36,7 @@ const ExternalApi = ({ data }) => {
   const handleDelete = () => {
     deleteDatabase()
     setBaseExists(false)
+    refetch()
 
   };
      
@@ -46,7 +47,8 @@ const ExternalApi = ({ data }) => {
         data, { headers: { Authorization: token ? `Bearer ${token}` : "" } });
       console.log(response);
       setSuccess(true)
-      //setBaseExists(true)
+      setBaseExists(true)
+      refetch()
     } catch (error) {
       console.error(error)
     }
@@ -66,7 +68,7 @@ const ExternalApi = ({ data }) => {
          <Button className="my-3" color="danger" onClick={handleDelete}>Delete Database</Button>
         </> : (
           <>
-        <h2>You have no database</h2>
+        <h3>You have no database</h3>
         <p>You can upload your database from here!</p>
         <FileUpload sendToServer={sendToServer} /> 
         </>

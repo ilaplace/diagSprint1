@@ -35,7 +35,7 @@ query GetClassifie{
 `
 const App = () => {
 
-  const { data } = useQuery(GET_CLASSIFIER);
+  const { data, refetch } = useQuery(GET_CLASSIFIER);
   const { loading } = useAuth0();
   
 
@@ -54,7 +54,7 @@ const App = () => {
           <Switch>
             <Route path="/" exact component={Home} />
             <PrivateRoute path="/profile" component={Profile}  />
-            <StatefulRoute path="/external-api" component={ExternalApi} data={data}/>          
+            <StatefulRoute path="/external-api" component={ExternalApi} data={data} refetch={refetch}/>          
             <PrivateRoute path="/theapp" component={TheApp} />
           </Switch>
         </Container>

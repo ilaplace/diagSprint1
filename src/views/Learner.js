@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import { Button } from "reactstrap";
 import { useMutation, useQuery }  from "@apollo/react-hooks";
 import gql from "graphql-tag";
@@ -19,25 +19,32 @@ const CHECK_STATUS = gql`
 const Learner = () => {
 
     const timerCallback = async () => {
-
         // Should not await the the data 
         const {data} = await refetch()
         data && console.log(data);
         
         // gotta check if the check status available
         data.checkStatus && setTraining(data.checkStatus)
-        if (data.checkStatus === 'done') {
+        if (data.checkStatus !== 'training') {
+            console.log("true tat");
+            
             clearInterval(t)
         }
     
     };
-    
-    
+
     const [ training, setTraining ] = useState('untrained');
     const [ startTrain ] = useMutation(START_TRAINING);
     const { refetch } = useQuery(CHECK_STATUS);
     var t;
-    t = setInterval(timerCallback,1000);
+    
+
+    useEffect(() => {
+        t = setInterval(timerCallback,1000);
+        return () => {
+            clearInterval(t)
+        };
+    }, [timerCallback,t])
     
     const trainHandler = () => {
         setTraining('training');
