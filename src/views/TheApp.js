@@ -1,4 +1,4 @@
-import React  from 'react'
+import React ,{ useState, useEffect} from 'react'
 import Learner from './Learner'
 import DiagModal from '../components/DiagModal'
 import gql from 'graphql-tag'
@@ -17,6 +17,20 @@ query GetClassifie{
  const TheApp = () => {
 
     const { data } = useQuery(GET_CLASSIFIER);
+    const [ baseExists, setBaseExists ] = useState();
+  
+    // Effect triggered on mount or when the data variable modified
+    useEffect(()=>{
+      if(data && data.getClassifier && data.getClassifier.classifierStatus )
+        {setBaseExists(true)
+        console.log("in effect true");
+      }
+        
+      else
+        {setBaseExists(false)
+        console.log("in effect false");
+        }
+    },[data])
 
    
     //data && data.getClassifier && console.log(data.getClassifier.classifierStatus);
@@ -25,11 +39,17 @@ query GetClassifie{
     const typesOfFeatures = data && data.getClassifier && data.getClassifier.featureTypes 
 
     return (
-        <>            
-            <Learner initialState={istate}/>  
+        baseExists ?
+        <>
+       <Learner initialState={istate}/>  
             <hr />
             <h2>Run Diagnostics</h2>
             <DiagModal data={typesOfFeatures} />
+        </>
+        :
+        <>            
+            
+            <p>first upload a database motherfucker</p>
         </>
     )
 }

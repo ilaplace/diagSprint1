@@ -68,7 +68,6 @@ const ExternalApi = ({ data, refetch}) => {
          <Button className="my-3" color="danger" onClick={handleDelete}>Delete Database</Button>
         </> : (
           <>
-        <h3>You have no database</h3>
         <p>You can upload your database from here!</p>
         <FileUpload sendToServer={sendToServer} /> 
         </>
