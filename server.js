@@ -18,7 +18,7 @@ if (!authConfig.domain || !authConfig.audience) {
 
 app.use(morgan("dev"));
 app.use(helmet());
-app.use(express.static(join(__dirname, "/public")));
+app.use(express.static(join(__dirname, "public")));
 
 const checkJwt = jwt({
   secret: jwksRsa.expressJwtSecret({
