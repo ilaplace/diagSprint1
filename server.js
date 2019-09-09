@@ -8,7 +8,7 @@ const authConfig = require("./src/auth_config.json");
 
 const app = express();
 
-const port = process.env.SERVER_PORT || 8080;
+const port = process.env.PORT || 8080;
 
 if (!authConfig.domain || !authConfig.audience) {
   throw new Error(
@@ -18,7 +18,7 @@ if (!authConfig.domain || !authConfig.audience) {
 
 app.use(morgan("dev"));
 app.use(helmet());
-app.use(express.static(join(__dirname, "build")));
+app.use(express.static(join(__dirname, "/public")));
 
 const checkJwt = jwt({
   secret: jwksRsa.expressJwtSecret({
