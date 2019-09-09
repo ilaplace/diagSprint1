@@ -32,7 +32,8 @@ query GetClassifie{
 }
 `
 const App = () => {
-
+  console.log(`Environment ${process.env.NODE_ENV }`);
+  
   const { data, refetch } = useQuery(GET_CLASSIFIER);
   const { loading } = useAuth0();
 
