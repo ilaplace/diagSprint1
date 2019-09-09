@@ -3,7 +3,7 @@ import Learner from './Learner'
 import DiagModal from '../components/DiagModal'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
-import Loading from '../components/Loading'
+
 
 const GET_CLASSIFIER = gql`
 query GetClassifie{
@@ -48,7 +48,7 @@ query GetClassifie{
         </>
         :
         <>            
-            
+            <h3>{process.env.REACT_APP_DENEME}</h3>
             <p>first upload a database motherfucker</p>
         </>
     )

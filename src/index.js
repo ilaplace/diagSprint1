@@ -10,7 +10,7 @@ import { InMemoryCache } from "apollo-cache-inmemory"
 import { HttpLink } from "apollo-link-http"
 import { ApolloProvider } from "@apollo/react-hooks"
 import { setContext } from "apollo-link-context"
-
+import { configURI } from './constants'
 
 const onRedirectCallback = appState => {
   window.history.replaceState(
@@ -24,7 +24,7 @@ const onRedirectCallback = appState => {
 
 const cache = new InMemoryCache();
 const httpLink = new HttpLink({
-  uri: 'http://0.0.0.0:8000/graphql'
+  uri: configURI.url.API_URL.concat('graphql')
 });
 
 const authLink = setContext((_, { headers }) => {

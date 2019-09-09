@@ -5,6 +5,7 @@ import { Alert } from 'reactstrap';
 import { useMutation } from '@apollo/react-hooks';
 import { Button } from 'reactstrap'
 import gql from 'graphql-tag';
+import { configURI } from '../constants'
 
 
 const DELETE_DATABASE = gql`
@@ -43,7 +44,7 @@ const ExternalApi = ({ data, refetch}) => {
   const sendToServer = async (data) => {
     const token = localStorage.getItem('token');
     try {
-      const response = await axios.post("http://0.0.0.0:8000/api/upload",
+      const response = await axios.post(configURI.url.API_URL.concat("api/upload"),
         data, { headers: { Authorization: token ? `Bearer ${token}` : "" } });
       console.log(response);
       setSuccess(true)
