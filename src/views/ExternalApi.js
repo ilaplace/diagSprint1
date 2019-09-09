@@ -43,7 +43,7 @@ const ExternalApi = ({ data, refetch}) => {
   const sendToServer = async (data) => {
     const token = localStorage.getItem('token');
     try {
-      const response = await axios.post("http://127.0.0.1:3010/api/upload",
+      const response = await axios.post("http://0.0.0.0:8000/api/upload",
         data, { headers: { Authorization: token ? `Bearer ${token}` : "" } });
       console.log(response);
       setSuccess(true)
