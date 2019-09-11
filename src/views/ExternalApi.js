@@ -24,12 +24,10 @@ const ExternalApi = ({ data, refetch}) => {
   useEffect(()=>{
     if(data && data.getClassifier && data.getClassifier.classifierStatus )
       {setBaseExists(true)
-      console.log("in effect true");
     }
       
     else
       {setBaseExists(false)
-      console.log("in effect false");
       }
   },[data])
 
@@ -43,6 +41,7 @@ const ExternalApi = ({ data, refetch}) => {
      
   const sendToServer = async (data) => {
     const token = localStorage.getItem('token');
+
     try {
       const response = await axios.post(configURI.url.API_URL.concat("api/upload"),
         data, { headers: { Authorization: token ? `Bearer ${token}` : "" } });

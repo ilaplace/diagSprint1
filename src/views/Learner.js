@@ -19,15 +19,10 @@ const CHECK_STATUS = gql`
 const Learner = () => {
 
     const timerCallback = async () => {
-        // Should not await the the data 
         const {data} = await refetch()
-        data && console.log(data);
-        
         // gotta check if the check status available
         data.checkStatus && setTraining(data.checkStatus)
         if (data.checkStatus !== 'training') {
-            console.log("true tat");
-            
             clearInterval(t)
         }
     

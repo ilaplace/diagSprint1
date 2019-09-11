@@ -3,7 +3,7 @@ import Learner from './Learner'
 import DiagModal from '../components/DiagModal'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
-
+import { Alert } from 'reactstrap'
 
 const GET_CLASSIFIER = gql`
 query GetClassifie{
@@ -23,12 +23,8 @@ query GetClassifie{
     useEffect(()=>{
       if(data && data.getClassifier && data.getClassifier.classifierStatus )
         {setBaseExists(true)
-        console.log("in effect true");
-      }
-        
-      else
-        {setBaseExists(false)
-        console.log("in effect false");
+      }else
+        {setBaseExists(false)     
         }
     },[data])
 
@@ -48,8 +44,12 @@ query GetClassifie{
         </>
         :
         <>            
-            <h3>{process.env.REACT_APP_DENEME}</h3>
-            <p>first upload a database motherfucker</p>
+            <Alert color="warning"> 
+                <h1>Warning</h1>
+                <p>To start diagnosing first you must upload a  
+                    <a href="/external-api" className="alert-link"> database</a></p>
+            </Alert>
+
         </>
     )
 }
