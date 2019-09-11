@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input, Label } from 'reactstrap';
 import Diagnose from '../views/Diagnose'
+import gql from "graphql-tag"
+import {useQuery} from '@apollo/react-hooks'
 
-const ModalDiag =   ({data}) => {
+const GET_DIAGNOSE_RESPONSE = gql`
+{
+    diagnoseResponse @client
+}
+`
+const ModalDiag = ({typesOfFeatures}) => {
     
     const [state, setMyState] = useState(false);
     const [secondState, setSecondState] = useState(false);
     const [patientNumber, setPatientNumber] = useState(1);
-    
+    const { data } = useQuery(GET_DIAGNOSE_RESPONSE);
     
     const toggle = () => {
         setMyState(!state)
@@ -21,6 +28,8 @@ const ModalDiag =   ({data}) => {
     const selectHandler = (event) => {
         setPatientNumber(event.target.value);
     }
+    data && data.diagnoseResponse && console.log(data.diagnoseResponse);
+    
     return (
         <div>
                 <Form >
@@ -41,7 +50,7 @@ const ModalDiag =   ({data}) => {
                 <ModalHeader toggle={toggle}>Diagonse a sucker</ModalHeader>
                 <ModalBody>
 
-                    <Diagnose classifier={data} numberOfPatients={patientNumber} />
+                    <Diagnose classifier={typesOfFeatures} numberOfPatients={patientNumber} />
                 </ModalBody>
                 <ModalFooter>
                     <Button color="primary" onClick={secondToggle}>Forward</Button>{' '}

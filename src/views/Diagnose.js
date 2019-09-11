@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from "reactstrap";
 import axios from 'axios'
 import ReactDataSheet from 'react-datasheet';
+import { useApolloClient} from '@apollo/react-hooks';
 import 'react-datasheet/lib/react-datasheet.css';
 
 const Diagnose = ({classifier, numberOfPatients}) => {
@@ -32,12 +33,17 @@ const Diagnose = ({classifier, numberOfPatients}) => {
     }
     const [myState, setMyState] = useState(grid)
 
+    const client = useApolloClient();
+
     const sendToServer = async (data) => {
         const token = localStorage.getItem('token');
-
+        
         try {
-            const response = await axios.post("http://127.0.0.1:3010/api/diagnose",
+            const response = await axios.post("http://0.0.0.0:8000/api/diagnose",
                 data, { headers: { Authorization: token ? `Bearer ${token}` : "" } });
+            client.writeData({
+                data: { diagnoseResponse: response.data.message}
+            })
             console.log(response);
         }catch (error) {
             console.error(error)

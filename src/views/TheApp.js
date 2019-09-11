@@ -40,7 +40,7 @@ query GetClassifie{
        <Learner initialState={istate}/>  
             <hr />
             <h2>Run Diagnostics</h2>
-            <DiagModal data={typesOfFeatures} />
+            <DiagModal typesOfFeatures={typesOfFeatures} />
         </>
         :
         <>            

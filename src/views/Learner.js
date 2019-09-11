@@ -21,7 +21,7 @@ const Learner = () => {
     const timerCallback = async () => {
         const {data} = await refetch()
         // gotta check if the check status available
-        data.checkStatus && setTraining(data.checkStatus)
+        data && data.checkStatus && setTraining(data.checkStatus)
         if (data.checkStatus !== 'training') {
             clearInterval(t)
         }
