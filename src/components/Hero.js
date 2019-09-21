@@ -8,7 +8,7 @@ const Hero = () => (
     <h1 className="mb-4">This is your MD</h1>
 
     <p className="lead">
-      Holy Crap!! This should be a new age!
+    This should be a new age!
     </p>
   </div>
 );
