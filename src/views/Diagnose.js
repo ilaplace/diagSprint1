@@ -4,6 +4,7 @@ import axios from 'axios'
 import ReactDataSheet from 'react-datasheet';
 import { useApolloClient} from '@apollo/react-hooks';
 import 'react-datasheet/lib/react-datasheet.css';
+import { configURI } from '../constants'
 
 const Diagnose = ({classifier, numberOfPatients}) => {
 
@@ -39,7 +40,7 @@ const Diagnose = ({classifier, numberOfPatients}) => {
         const token = localStorage.getItem('token');
         
         try {
-            const response = await axios.post("http://0.0.0.0:8000/api/diagnose",
+            const response = await axios.post(configURI.url.API_URL.concat("api/diagnose"),
                 data, { headers: { Authorization: token ? `Bearer ${token}` : "" } });
             client.writeData({
                 data: { diagnoseResponse: response.data.message}
