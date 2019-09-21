@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input, Label } from 'reactstrap';
 import Diagnose from '../views/Diagnose'
 import gql from "graphql-tag"
@@ -28,7 +28,11 @@ const ModalDiag = ({typesOfFeatures}) => {
     const selectHandler = (event) => {
         setPatientNumber(event.target.value);
     }
-    data && data.diagnoseResponse && console.log(data.diagnoseResponse);
+   // data && data.diagnoseResponse && console.log(data.diagnoseResponse);
+   useEffect(() => {
+    data && data.diagnoseResponse && secondToggle();
+   }, [data])
+  
     
     return (
         <div>
@@ -46,26 +50,28 @@ const ModalDiag = ({typesOfFeatures}) => {
                 </FormGroup>
             </Form>
             <Button onClick={toggle} className="my-3">Diagnose</Button>
+
+             {/* Patient register modal */}
             <Modal isOpen={state} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Diagonse a sucker</ModalHeader>
+                <ModalHeader toggle={toggle}>Diagonse</ModalHeader>
                 <ModalBody>
 
                     <Diagnose classifier={typesOfFeatures} numberOfPatients={patientNumber} />
                 </ModalBody>
-                <ModalFooter>
+                {/* <ModalFooter>
                     <Button color="primary" onClick={secondToggle}>Forward</Button>{' '}
                     <Button color="secondary" onClick={toggle}>Cancel</Button>
-                </ModalFooter>
+                </ModalFooter> */}
             </Modal>
-
+            
+             {/* Result Modal */}
             <Modal isOpen={secondState} toggle={secondToggle}>
-                <ModalHeader toggle={secondToggle}>Suckers</ModalHeader>
+                <ModalHeader toggle={secondToggle}>Results</ModalHeader>
                 <ModalBody>
-
+                {data && data.diagnoseResponse}
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={secondToggle}>Diagnose</Button>{' '}
-                    <Button color="secondary" onClick={secondToggle}>Cancel</Button>
+                    <Button color="secondary" onClick={secondToggle}>Ok</Button>
                 </ModalFooter>
             </Modal>
         </div>

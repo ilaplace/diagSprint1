@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from "reactstrap";
+import { Button , ModalFooter} from "reactstrap";
 import axios from 'axios'
 import ReactDataSheet from 'react-datasheet';
 import { useApolloClient} from '@apollo/react-hooks';
@@ -50,9 +50,11 @@ const Diagnose = ({classifier, numberOfPatients}) => {
             console.error(error)
         }
     };
+    // When submitted send the registered data to server
     const handleSubmit = (e) => {
         e.preventDefault();
-        sendToServer(myState);
+        sendToServer(myState.concat(
+            {"numberOfPatients": numberOfPatients}));
     };
     return (
         <div>
@@ -71,9 +73,12 @@ const Diagnose = ({classifier, numberOfPatients}) => {
                 }}
             />
 
-            <Button color="primary" className="mt-5" onClick={handleSubmit}>
+<ModalFooter>
+<Button color="primary" className="mt-5" onClick={handleSubmit}>
                 Submit
         </Button>
+</ModalFooter>
+            
             <br />
 
         </div>
