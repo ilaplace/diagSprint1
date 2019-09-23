@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button , ModalFooter} from "reactstrap";
+import { Button , Alert} from "reactstrap";
 import axios from 'axios'
 import ReactDataSheet from 'react-datasheet';
 import { useApolloClient} from '@apollo/react-hooks';
@@ -32,7 +32,8 @@ const Diagnose = ({classifier, numberOfPatients}) => {
     for (var j = 0; j < numberOfPatients; j++) {
         grid.push(objects)
     }
-    const [myState, setMyState] = useState(grid)
+    const [myState, setMyState] = useState(grid);
+    const [submitted, setSubmitted] = useState(false);
 
     const client = useApolloClient();
 
@@ -52,13 +53,14 @@ const Diagnose = ({classifier, numberOfPatients}) => {
     };
     // When submitted send the registered data to server
     const handleSubmit = (e) => {
+        setSubmitted(true);
         e.preventDefault();
         sendToServer(myState.concat(
             {"numberOfPatients": numberOfPatients}));
     };
     return (
         <div>
-            <h1>Diagnose</h1>
+            {(submitted == true) ? <Alert color="success">Submitted</Alert> : ""}
             <ReactDataSheet
                 data={myState}
                 overflow={'wrap'}
@@ -73,11 +75,11 @@ const Diagnose = ({classifier, numberOfPatients}) => {
                 }}
             />
 
-<ModalFooter>
-<Button color="primary" className="mt-5" onClick={handleSubmit}>
+        
+    <Button color="primary" className="mt-5" onClick={handleSubmit}>
                 Submit
         </Button>
-</ModalFooter>
+
             
             <br />
 

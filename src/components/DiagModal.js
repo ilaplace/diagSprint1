@@ -28,15 +28,14 @@ const ModalDiag = ({typesOfFeatures}) => {
     const selectHandler = (event) => {
         setPatientNumber(event.target.value);
     }
-   // data && data.diagnoseResponse && console.log(data.diagnoseResponse);
-   useEffect(() => {
-    data && data.diagnoseResponse && secondToggle();
-   }, [data])
-  
+   data && data.diagnoseResponse && console.log(data.diagnoseResponse);
+//    useEffect(() => {
+//     data && data.diagnoseResponse && secondToggle();
+//    }, [data])
     
     return (
         <div>
-                <Form >
+            <Form >
                 <Label>Please select the number of patients that you want to diagnose</Label>
                 <FormGroup >
                     <Label for="Select the number of patients"></Label>
@@ -58,10 +57,10 @@ const ModalDiag = ({typesOfFeatures}) => {
 
                     <Diagnose classifier={typesOfFeatures} numberOfPatients={patientNumber} />
                 </ModalBody>
-                {/* <ModalFooter>
+                <ModalFooter>
                     <Button color="primary" onClick={secondToggle}>Forward</Button>{' '}
                     <Button color="secondary" onClick={toggle}>Cancel</Button>
-                </ModalFooter> */}
+                </ModalFooter>
             </Modal>
             
              {/* Result Modal */}
