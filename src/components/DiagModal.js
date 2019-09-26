@@ -35,10 +35,10 @@ const ModalDiag = ({typesOfFeatures}) => {
     
     return (
         <div>
-            <Form >
+            {/* <Form >
                 <Label>Please select the number of patients that you want to diagnose</Label>
                 <FormGroup >
-                    <Label for="Select the number of patients"></Label>
+                 <Label for="Select the number of patients"></Label>
                     <Input type="select" name="select" style={{width: "20%"}} onChange={selectHandler} value={patientNumber}>
                         <option>1</option>
                         <option>2</option>
@@ -47,8 +47,10 @@ const ModalDiag = ({typesOfFeatures}) => {
                         <option>5</option>
                     </Input>
                 </FormGroup>
-            </Form>
-            <Button onClick={toggle} className="my-3">Diagnose</Button>
+            </Form> */}
+            <Diagnose classifier={typesOfFeatures} numberOfPatients={patientNumber}/>
+            {/* <Button onClick={toggle} className="my-3">Diagnose</Button>{' '} */}
+            <Button color="primary" className="my-3" onClick={secondToggle}>Forward</Button>
 
              {/* Patient register modal */}
             <Modal isOpen={state} toggle={toggle}>

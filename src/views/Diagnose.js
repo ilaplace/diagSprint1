@@ -63,7 +63,7 @@ const Diagnose = ({classifier, numberOfPatients}) => {
             {(submitted == true) ? <Alert color="success">Submitted</Alert> : ""}
             <ReactDataSheet
                 data={myState}
-                overflow={'wrap'}
+                overflow={'clip'}
                 valueRenderer={(cell) => cell.value}
                 onContextMenu={(e, cell, i, j) => cell.readOnly ? e.preventDefault() : null}
                 onCellsChanged={changes => {
@@ -80,8 +80,7 @@ const Diagnose = ({classifier, numberOfPatients}) => {
                 Submit
         </Button>
 
-            
-            <br />
+
 
         </div>
     )
