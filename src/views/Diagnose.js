@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { Button , Alert} from "reactstrap";
+import { Button, Alert } from "reactstrap";
 import axios from 'axios'
 import ReactDataSheet from 'react-datasheet';
-import { useApolloClient} from '@apollo/react-hooks';
+import { useApolloClient } from '@apollo/react-hooks';
 import 'react-datasheet/lib/react-datasheet.css';
 import { configURI } from '../constants'
 
-const Diagnose = ({classifier, numberOfPatients}) => {
+const Diagnose = ({ classifier, numberOfPatients }) => {
 
     // If condition the avoid this error if classifier could not be read
-   
-    
+
+
     var objects = [];
 
     for (var i = 0; i < classifier.length; i++) {
@@ -24,8 +24,8 @@ const Diagnose = ({classifier, numberOfPatients}) => {
 
     const grid = []
     const header = []
-    for (var k =0; k < classifier.length; k++){
-        header.push({value: classifier[k], readOnly: true})
+    for (var k = 0; k < classifier.length; k++) {
+        header.push({ value: classifier[k], readOnly: true })
     }
     grid.push(header)
 
@@ -39,15 +39,21 @@ const Diagnose = ({classifier, numberOfPatients}) => {
 
     const sendToServer = async (data) => {
         const token = localStorage.getItem('token');
-        
+
         try {
             const response = await axios.post(configURI.url.API_URL.concat("api/diagnose"),
-                data, { headers: { Authorization: token ? `Bearer ${token}` : "" } });
+                data, {
+                    headers:
+                    {
+                        Authorization: token ? `Bearer ${token}` : ""
+                    }
+                }
+            );
             client.writeData({
-                data: { diagnoseResponse: response.data.message}
+                data: { diagnoseResponse: response.data.message }
             })
             console.log(response);
-        }catch (error) {
+        } catch (error) {
             console.error(error)
         }
     };
@@ -56,7 +62,7 @@ const Diagnose = ({classifier, numberOfPatients}) => {
         setSubmitted(true);
         e.preventDefault();
         sendToServer(myState.concat(
-            {"numberOfPatients": numberOfPatients}));
+            { "numberOfPatients": numberOfPatients }));
     };
     return (
         <div>
@@ -75,8 +81,8 @@ const Diagnose = ({classifier, numberOfPatients}) => {
                 }}
             />
 
-        
-    <Button color="primary" className="mt-5" onClick={handleSubmit}>
+
+            <Button color="primary" className="mt-5" onClick={handleSubmit}>
                 Submit
         </Button>
 
